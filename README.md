@@ -50,6 +50,7 @@ docker ps
 
 ## Struttura progetto 
 
+```
 Testbed_Tesi_MUD/
 │
 ├── docker-compose.yml
@@ -90,6 +91,7 @@ Testbed_Tesi_MUD/
 ├── test_full_mesh_ping.sh
 ├── LICENSE
 └── README.md
+```
 
 ## Licenza
 
