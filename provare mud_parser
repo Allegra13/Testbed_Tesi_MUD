@@ -1,0 +1,2 @@
+curl "http://localhost:8080/check?protocol=tcp&port=80"
+curl "http://localhost:8080/check?protocol=udp&port=53"

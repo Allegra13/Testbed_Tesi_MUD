@@ -1,0 +1,35 @@
+# File Python temporanei
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Log e file temporanei
+*.log
+*.tmp
+*.bak
+
+# File di configurazione personali o ambienti virtuali
+.env
+*.swp
+*.swo
+
+# Database temporanei
+*.sqlite3
+
+# File PID o socket
+*.pid
+*.sock
+
+# Docker
+*.pidfile
+docker-compose.override.yml
+
+# Backup editor
+*~ 
+
+# Jupyter (se mai li userai)
+.ipynb_checkpoints/
+
+# System-specific
+.DS_Store
+Thumbs.db

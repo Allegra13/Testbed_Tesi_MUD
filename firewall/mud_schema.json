@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "mud-url",
+    "ietf-access-control-list:acls"
+  ],
+  "properties": {
+    "mud-url": {
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "ietf-access-control-list:acls": {
+      "type": "object",
+      "required": [
+        "acl"
+      ],
+      "properties": {
+        "acl": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "aces"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "aces": {
+                "type": "object",
+                "required": [
+                  "ace"
+                ],
+                "properties": {
+                  "ace": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name",
+                        "matches",
+                        "actions"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "matches": {
+                          "type": "object",
+                          "properties": {
+                            "tcp": {
+                              "type": "object",
+                              "required": [
+                                "destination-port"
+                              ],
+                              "properties": {
+                                "destination-port": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "actions": {
+                          "type": "object",
+                          "required": [
+                            "forwarding"
+                          ],
+                          "properties": {
+                            "forwarding": {
+                              "type": "string",
+                              "enum": [
+                                "accept",
+                                "drop"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

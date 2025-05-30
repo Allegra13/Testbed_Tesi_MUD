@@ -1,0 +1,25 @@
+{
+  "mud-url": "https://example.com/firewall-policy",
+  "ietf-access-control-list:acls": {
+    "acl": [
+      {
+        "name": "firewall-acl",
+        "aces": {
+          "ace": [
+            {
+              "name": "allow-http",
+              "matches": {
+                "tcp": {
+                  "destination-port": 80
+                }
+              },
+              "actions": {
+                "forwarding": "drop"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

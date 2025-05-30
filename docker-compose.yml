@@ -1,0 +1,118 @@
+services:
+
+  firewall:
+    build: ./firewall
+    container_name: firewall
+    privileged: true
+    networks:
+      fw_net:
+        ipv4_address: 10.0.0.1
+      mudnet:
+        ipv4_address: 192.168.1.3
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./firewall/logs:/logs
+
+
+  gateway1:
+    build: ./gateways/gateway1
+    container_name: gateway1
+    privileged: true
+    networks:
+      fw_net:
+        ipv4_address: 10.0.0.2
+      gw1_net:
+        ipv4_address: 172.18.0.1
+      mudnet:
+        ipv4_address: 192.168.1.10 
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+
+  gateway2:
+    build: ./gateways/gateway2
+    container_name: gateway2
+    privileged: true
+    networks:
+      gw1_net:
+        ipv4_address: 172.18.0.2
+      gw2_net:
+        ipv4_address: 172.19.0.1
+      mudnet:
+        ipv4_address: 192.168.1.11
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+
+  dev_a:
+    build: ./devices/devA
+    container_name: devA
+    networks:
+      fw_net:
+        ipv4_address: 10.0.0.4
+    cap_add:
+      - NET_ADMIN
+
+  dev_b:
+    build: ./devices/devB
+    container_name: devB
+    networks:
+      gw1_net:
+        ipv4_address: 172.18.0.3
+    cap_add:
+      - NET_ADMIN
+
+  dev_c:
+    build: ./devices/devC
+    container_name: devC
+    networks:
+      gw2_net:
+        ipv4_address: 172.19.0.2
+    cap_add:
+      - NET_ADMIN
+
+  osmud:
+    build:
+      context: .
+      dockerfile: ./osmud/Dockerfile
+    container_name: osmud
+    privileged: true
+    networks:
+      mudnet:
+        ipv4_address: 192.168.1.1
+    volumes:
+      - ./osmud/mudfiles:/var/www/html/mudfiles
+    ports:
+      - "8080:80"
+
+networks:
+  fw_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+          gateway: 10.0.0.254
+
+  mudnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.254
+
+  gw1_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+          gateway: 172.18.0.254
+
+  gw2_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24
+          gateway: 172.19.0.254
