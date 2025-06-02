@@ -16,6 +16,6 @@ RUN pip3 install requests
 RUN pip3 install flask requests
 COPY start.sh /start.sh
 COPY check_policy.py /etc/gateway2/check_policy.py
-RUN chmod +x /setup.sh
+RUN chmod +x /start.sh
 
 CMD ["/start.sh"]
