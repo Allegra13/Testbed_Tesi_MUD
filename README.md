@@ -16,7 +16,7 @@ Il parser MUD (`mud_parser.py`) analizza i file MUD JSON e applica dinamicamente
 - **Gateway1 / Gateway2**: interrogano il firewall per verificare il permesso delle comunicazioni.
 - **Dispositivi IoT (devA, devB, devC)**: dispositivi simulati che generano traffico.
 - **osmud**: servizio HTTP che ospita i file MUD.
-- **Script**: `check_policy.py`, `start.sh`, `setup.sh`, `mud_parser.py`
+- **Script**: `check_policy.py`, `start.sh`, `mud_parser.py`
 
 Tutti i container sono connessi in una rete simulata multilivello con Docker.
 
@@ -65,10 +65,10 @@ Testbed_Tesi_MUD/
 │   ├── gateway1/
 │   │   ├── check_policy.py
 │   │   ├── rest_api.py
-│   │   └── setup.sh
+│   │   └── start.sh
 │   └── gateway2/
 │       ├── check_policy.py
-│       └── setup.sh
+│       └── start.sh
 │
 ├── devices/
 │   ├── devA/
