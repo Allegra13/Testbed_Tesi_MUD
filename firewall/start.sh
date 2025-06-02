@@ -2,6 +2,7 @@
 sysctl -w net.ipv4.ip_forward=1
 sysctl -w net.ipv4.conf.eth0.send_redirects=0
 sysctl -w net.ipv4.conf.all.send_redirects=0
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 
 ip route add 172.18.0.0/24 via 192.168.1.10 dev eth1
 ip route add 172.19.0.0/24 via 192.168.1.11 dev eth1

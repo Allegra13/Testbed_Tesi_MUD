@@ -13,8 +13,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 RUN pip3 install requests
-COPY setup.sh /setup.sh
+RUN pip3 install flask requests
+COPY start.sh /start.sh
 COPY check_policy.py /etc/gateway2/check_policy.py
 RUN chmod +x /setup.sh
 
-CMD ["/setup.sh"]
+CMD ["/start.sh"]
